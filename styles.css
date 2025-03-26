@@ -201,7 +201,7 @@ body {
     margin: 0.2em 0;
 }
 
-footer {
+.tracking-footer {
     display: flex;
     justify-content: center; /* Zentriert die Buttons horizontal */
     align-items: center; /* Zentriert die Buttons vertikal */
@@ -213,6 +213,28 @@ footer {
     padding: 0;
     margin: 0;
 }
+
+
+footer ul {
+    list-style: none;
+    padding-left: 0;
+    vertical-align: middle;
+    --bs-navbar-link-color: var(--bs-gray-800);
+    --bs-navbar-link-hover-color: var(--bs-gray-900);
+    --bs-navbar-link-hover-bg: var(--bs-gray-200);
+  }
+
+  footer li {
+    display: inline-block;
+    vertical-align: middle;
+    color:aliceblue;
+
+  }
+
+  footer li a {
+    text-decoration: none;
+    color:aliceblue;
+  }
 
 .time-button-item img {
     width: 75px; /* Breite des Icons */
