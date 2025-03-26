@@ -340,10 +340,10 @@ footer ul {
         background-image: url('assets/images/MountainsMobile.svg')
     }
 
-    header{
-        nav ul {
-            display: none;
-        }
+    header nav {
+        display: space-evenly;
+        list-style: none;
+        padding-left: 20rem;
     }
     
 }
