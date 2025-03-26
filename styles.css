@@ -398,6 +398,13 @@ footer ul {
         flex-direction: column;
     }
 
+    .header-overlay {
+        display: none;
+    }
+
+    .header-menu-overlay {
+        display: none;
+    }
 
     .header-hamburger-menu{
         display: none;
