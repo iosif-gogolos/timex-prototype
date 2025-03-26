@@ -4,8 +4,6 @@
     border: 1px solid var(--bs-gray-200);
     border-radius: .25rem;
 }
-
-
   
 .component-header {
     color: var(--bs-purple);
@@ -179,6 +177,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    color:#364856;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
