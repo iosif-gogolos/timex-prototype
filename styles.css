@@ -29,6 +29,12 @@ header {
     color:aliceblue;
   }
 
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
   header ul {
     list-style: none;
     padding-left: 0;
@@ -83,11 +89,6 @@ header {
     text-decoration: underline;
 }
 
-header nav {
-    display: none;
-    list-style: none;
-    padding-left: 20rem;
-}
 
   .main-background {
     background-image: url('assets/images/MountainsDesktop.svg');
@@ -101,6 +102,23 @@ header nav {
     --bs-table-bg: var(--bs-gray-100);
     --bs-table-border-color: transparent;
   }
+
+  .desktop-nav {
+    display: none;
+}
+
+.desktop-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.desktop-nav li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
 
   nav {
     font-family: Arial, Helvetica, sans-serif;
@@ -377,6 +395,14 @@ footer ul {
     object-fit: contain; /* Stellt sicher, dass das Bild proportional bleibt */
     margin-bottom: 0.5em; /* Abstand zwischen Icon und Button */
 }
+.header-hamburger-menu {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
   
 @media (max-width: 768px) {
     .main-background{
@@ -414,6 +440,9 @@ footer ul {
     }
     .header-hamburger-menu{
         display: none;
+    }
+    desktop-nav {
+        display: block;
     }
 
     header {

@@ -9,25 +9,24 @@
 </head>
 <body>
     <header style="background-color: #000000;">
+        <!-- #region -->
         <p><br></p>
-        <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between;">
             <div class="row">
                 <div class="col-md-6">
                     <img src="assets/images/pdr-logo-white.png" alt="PDR-Team" class="img-fluid" style="width: 150px;">
                 </div>
                 <div class="col-md-6">
-                    <nav>
+                    <nav class="desktop-nav">
                         <ul>
-                            <li><a href="#"></a></li>
-                            <li><a href="#">Login</a></li>
+                            <li><a href="login.html">Login</a></li>
                         </ul>                            
                     </nav>
-                    <h2></h2>
-                    <p></p>
+          
                 </div>
                 <p><br></p>
             </div>
-            <div id="header-hamburger-menu" class="header-hamburger-menu">
+            <div id="header-hamburger-menu" class="header-hamburger-menu" style="margin-right: 4rem;">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -38,18 +37,19 @@
     <main>
         <div id="header-overlay" class="header-overlay">
             <div class="header-overlay-content">
+                <button id="header-close-menu" class="btn btn-secondary" style="display: block; align-items: center;">x</button>
+
                 <img src="assets/images/timex-logo-transparent.png" alt="TimeX Logo" class="img-fluid" style="width: 100px; margin-bottom: 1em;">
                 <p>Version: 1.0.0</p>
-                <a href="login.html">Login</a>
+                <a class="btn btn-primary" href="login.html">Login</a>
                 <a href="https://www.pdr-team.de/datenschutz/">Datenschutz</a>
                 <a href="https://www.pdr-team.de/impressum/">Impressum</a>
                 <p>&copy; 2025 PDR-Team GmbH</p>
-                <button id="header-close-menu" class="btn btn-secondary">x</button>
             </div>
         </div>
         <p><br></p>
         <p><br></p>
-
+<!-- #endregion -->
         <div class="container">
             <!--button id="header-hamburger-menu">☰</button-->
 
@@ -70,7 +70,7 @@
                         so dass die Personalabteilung genau tracken kann, wo<br>
                         Projektleiter Zeiten freigegeben haben.</p>
                         <br>
-                    <a class="btn btn-primary" href="login.html">Get Started</a>
+                    <a class="btn btn-primary" href="login.html">Jetzt starten</a>
                 </div>
             </div>
         </div>
