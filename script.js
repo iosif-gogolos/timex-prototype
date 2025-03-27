@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('GehenAktiv').addEventListener('click', function(){
         document.getElementById('time-tracking').style.display = 'flex';
         document.getElementById('FeierabendAktiv').style.display = 'flex';
+        document.getElementById('KommenAktiv').style.display = 'flex';
+
         // setze die aktuelle Uhrzeit und das Datum
         const now = new Date();
         document.getElementById('current-time').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function(){
         // Kontrollprompt anzeigen
         const note = prompt('Sie sind dabei ihren Arbeitstag zu beenden. Dieser Schritt kann nicht ruckgängig gemacht werden. \nOptional: Möchten Sie eine Notiz an den Projektleiter senden?');
         if (note !== null){
-            alert('Ihr Arbeitstag wurde beendet. Schönen Feierabend!' + (note || 'Keine Notiz'));
+            alert('Ihr Arbeitstag wurde beendet. Schönen Feierabend! \n' + (note || ' Keine Notiz'));
         }
         // Reset der Buttons
         document.getElementById('KommenAktiv').disabled = false;
