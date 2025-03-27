@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
             firstStartTime = now;
             document.getElementById('info-container').style.display = 'none';
             document.getElementById('time-tracking').style.display = 'flex';
+            document.getElementById('GehenAktiv').style.display = 'flex';
         } else{
             // Zweites Einstempen des Tages
             secondStartTime = now;
@@ -45,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function(){
         const now = new Date();
         firstEndTime = now;
 
+        document.getElementById('FeierabendAktiv').style.display ='flex';
+
         // Zweiten tracking container erstellen und anzeigen
         if (!document.getElementById('time-tracking-2')){
             const secondContainer = document.getElementById('time-tracking').cloneNode(true);
@@ -54,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         // Zeit im zweiten Container aktualisieren
         const secondContainer = document.getElementById('time-tracking-2');
+        secondContainer.querySelector('#time-icon').src = 'assets/icons/GehenAktiv.svg';
         secondContainer.querySelector('#current-time').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
         secondContainer.querySelector('#current-date').textContent = now.toLocaleDateString('de-DE');
         secondContainer.style.display = 'flex';
@@ -73,20 +77,27 @@ document.addEventListener('DOMContentLoaded', function(){
         infoContainer.style.display = 'flex';
         infoContainer.innerHTML = ''; // Container leeren
 
-        if (firstTime && firstEndTime){
+        if (firstStartTime && firstEndTime){
             const workDuration = Math.round((firstEndTime - firstStartTime) / (1000 * 60));
             const workHours = Math.floor(workDuration / 60);
             const workMinutes = workDuration % 60;
 
+            const formattedHours = workHours.toString().padStart(2, '0');
+            const formattedMinutes = workMinutes.toString().padStart(2, '0');
+
             const workTimeInfo = document.createElement('p');
-            workTimeInfo.textContent = `Arbeitszeit heute: ${workHours}:${workMinutes}`;
+            workTimeInfo.textContent = `${formattedHours}:${formattedMinutes} h Arbeitszeit`;
             infoContainer.appendChild(workTimeInfo);
 
             if(breakDuration){
                 const breakHours = Math.floor(breakDuration /60);
                 const breakMinutes = breakDuration % 60;
+
+                const formattedBreakHours = breakHours.toString().padStart(2, '0');
+                const formattedBreakMinutes = breakMinutes.toString().padStart(2, '0');
+
                 const breakInfo = document.createElement('p');
-                breakInfo.textContent = `Pausenzeit heute: ${breakHours}:${breakMinutes}`;
+                breakInfo.textContent = `${formattedBreakHours}:${formattedBreakMinutes} h Pause`;
                 infoContainer.appendChild(breakInfo);
             }
         }
@@ -96,20 +107,23 @@ document.addEventListener('DOMContentLoaded', function(){
         const note = prompt('Sie sind dabei ihren Arbeitstag zu beenden. Dieser Schritt kann nicht ruckgängig gemacht werden. \nOptional: Möchten Sie eine Notiz an den Projektleiter senden?');
         if (note !== null){
             alert('Ihr Arbeitstag wurde beendet. Schönen Feierabend! \n' + (note || ' Keine Notiz'));
+             // Reset der Buttons
+            document.getElementById('KommenAktiv').disabled = false;
+            document.getElementById('KommenAktiv').querySelector('img').src = 'assets/icons/KommenAktivMitText.svg';
+
+            this.disabled = true;
+            this.querySelector('img').src = 'assets/icons/FeierabendInaktivMitText.svg';
+
+            const gehenButton = document.getElementById('GehenInaktiv');
+            gehenButton.disabled = true;
+            gehenButton.querySelector('img').src = 'assets/icons/GehenInaktivMitText.svg';
+
+            // Verstecke den "time-tracking"-Container
+            document.getElementById('time-tracking').style.display = 'none';
+        } else {
+            alert('Ihr Arbeitstag wurde noch nicht beendet.');
         }
-        // Reset der Buttons
-        document.getElementById('KommenAktiv').disabled = false;
-        document.getElementById('KommenAktiv').querySelector('img').src = 'assets/icons/KommenAktivMitText.svg';
-
-        this.disabled = true;
-        this.querySelector('img').src = 'assets/icons/FeierabendInaktivMitText.svg';
-
-        const gehenButton = document.getElementById('GehenInaktiv');
-        gehenButton.disabled = true;
-        gehenButton.querySelector('img').src = 'assets/icons/GehenInaktivMitText.svg';
-
-        // Verstecke den "time-tracking"-Container
-        document.getElementById('time-tracking').style.display = 'none';
+       
     });
 
 });
