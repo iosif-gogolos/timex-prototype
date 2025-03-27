@@ -13,7 +13,7 @@ body {
     --bs-body-font-family: var(--bs-font-monospace);
     --bs-body-line-height: 1.4;
     --bs-body-bg: var(--bs-white-100);
-    background-color: #364856;
+    background-color: #010101;
     color: #fff;
 }
 header {
@@ -49,6 +49,45 @@ header {
     text-decoration: none;
     color:aliceblue;
   }
+
+
+.header-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Inhalt des Menüs*/
+.header-overlay-content{
+    text-align: center;
+    padding: 2em;
+}
+
+.header-overlay-content a{
+    display: block;
+    margin: 1em 0;
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.header-overlay-content a:hover {
+    text-decoration: underline;
+}
+
+header nav {
+    display: none;
+    list-style: none;
+    padding-left: 20rem;
+}
 
   .main-background {
     background-image: url('assets/images/MountainsDesktop.svg');
@@ -339,21 +378,39 @@ footer ul {
     .main-background{
         background-image: url('assets/images/MountainsMobile.svg')
     }
-
-    header nav {
-        display: space-evenly;
-        list-style: none;
-        padding-left: 20rem;
+    .header-hamburger-menu{
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        position: relative;
     }
-    
+    .bar {
+        width: 100%;
+        height: 2px;
+        background-color: white;
+        transition: transform 0.3 ease;
+    }
+    .header-hamburger-menu.active .bar:nth-child(1){
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .header-hamburger-menu.active .bar:nth-child(2){
+        opacity: 0;
+    }
+    .header-hamburger-menu.active .bar:nth-child(3){
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
 }
 
 @media (min-width: 768px) {
     .time-button-container{
         flex-direction: column;
     }
-
-    
+    .header-hamburger-menu{
+        display: none;
+    }
 
     header {
         font-family: Arial, Helvetica, sans-serif;

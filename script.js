@@ -10,9 +10,10 @@ document.getElementById('header-hamburger-menu').addEventListener('click', funct
     document.getElementById('header-overlay').style.display = 'flex';
 })
 
-document.getElementById('header-hamburger-menu').addEventListener('click', function(){
+document.getElementById('header-close-menu').addEventListener('click', function(){
     document.getElementById('header-overlay').style.display = 'none';
 })
+
 
 document.getElementById('KommenAktiv').addEventListener('click', function (){
     // Zeige den "time-tracking"-Container an
