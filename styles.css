@@ -367,6 +367,10 @@ footer ul {
     color:aliceblue;
   }
 
+  footer li a:hover {
+    text-decoration: underline;
+}
+
 .time-button-item img {
     width: 75px; /* Breite des Icons */
     height: 75px; /* Höhe des Icons */
