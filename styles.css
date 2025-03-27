@@ -13,7 +13,7 @@ body {
     --bs-body-font-family: var(--bs-font-monospace);
     --bs-body-line-height: 1.4;
     --bs-body-bg: var(--bs-white-100);
-    background-color: #010101;
+    background-color: #000000;
     color: #fff;
 }
 header {
