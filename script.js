@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function(){
     let timeEntries = []; // Array to store time entries
     let totalWorkTime = 0; // Total work time 
     let totalBreakTime = 0; // Total break time
-
     let lastAction = null;
     let containerCount = 0;
 
@@ -27,14 +26,16 @@ document.addEventListener('DOMContentLoaded', function(){
         createTimeTrackingContainer(entry);
         
         if (lastAction === 'gehen' && timeEntries.length > 1) {
-            // Calculate break time
+            // Calculate and add break time
             const lastGehen = timeEntries.find(e => e.type === 'gehen');
-            const breakTime = Math.round((now - lastGehen.time) / (1000 * 60));
-            totalBreakTime += breakTime;
+            if (lastGehen) {
+                const breakTime = Math.round((now - lastGehen.time) / (1000 * 60));
+                totalBreakTime += breakTime;
+                updateInfoContainer();
+            }
         }
 
         lastAction = 'kommen';
-        updateInfoContainer();
         
         // Button states
         this.disabled = true;
@@ -57,13 +58,13 @@ document.addEventListener('DOMContentLoaded', function(){
         if (lastKommen) {
             const workTime = Math.round((now - lastKommen.time) / (1000 * 60));
             totalWorkTime += workTime;
+            updateInfoContainer();
         }
 
         // Create new tracking container
         createTimeTrackingContainer(entry);
         
         lastAction = 'gehen';
-        updateInfoContainer();
         document.getElementById('FeierabendAktiv').style.display = 'flex';
 
         // Button states
@@ -110,15 +111,13 @@ document.addEventListener('DOMContentLoaded', function(){
         infoContainer.style.display = 'flex';
         infoContainer.innerHTML = '';
 
-        if (totalWorkTime > 0) {
-            const workHours = Math.floor(totalWorkTime / 60);
-            const workMinutes = totalWorkTime % 60;
-            const formattedWork = `${String(workHours).padStart(2, '0')}:${String(workMinutes).padStart(2, '0')}`;
-            
-            const workTimeInfo = document.createElement('p');
-            workTimeInfo.textContent = `Arbeitszeit heute: ${formattedWork} h Arbeitszeit gebucht`;
-            infoContainer.appendChild(workTimeInfo);
-        }
+        const workHours = Math.floor(totalWorkTime / 60);
+        const workMinutes = totalWorkTime % 60;
+        const formattedWork = `${String(workHours).padStart(2, '0')}:${String(workMinutes).padStart(2, '0')}`;
+        
+        const workTimeInfo = document.createElement('p');
+        workTimeInfo.textContent = `${formattedWork} h Arbeitszeit gebucht`;
+        infoContainer.appendChild(workTimeInfo);
 
         if (totalBreakTime > 0) {
             const breakHours = Math.floor(totalBreakTime / 60);
@@ -126,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function(){
             const formattedBreak = `${String(breakHours).padStart(2, '0')}:${String(breakMinutes).padStart(2, '0')}`;
             
             const breakInfo = document.createElement('p');
-            breakInfo.textContent = `Pausenzeit heute: ${formattedBreak} h Pause gebucht`;
+            breakInfo.textContent = `\n${formattedBreak} h Pause gebucht`;
             infoContainer.appendChild(breakInfo);
         }
     }
@@ -137,8 +136,11 @@ document.addEventListener('DOMContentLoaded', function(){
         if (note !== null){
             alert('Ihr Arbeitstag wurde beendet. Schönen Feierabend! \n' + (note || ' Keine Notiz'));
              // Reset der Buttons
-            document.getElementById('KommenAktiv').disabled = false;
-            document.getElementById('KommenAktiv').querySelector('img').src = 'assets/icons/KommenAktivMitText.svg';
+            document.getElementById('KommenAktiv').disabled = true;
+            document.getElementById('KommenAktiv').querySelector('img').src = 'assets/icons/KommenInaktivMitText.svg';
+
+            document.getElementById('GehenAktiv').disabled = true;
+            document.getElementById('GehenAktiv').querySelector('img').src = 'assets/icons/GehenInaktivMitText.svg';
 
             this.disabled = true;
             this.querySelector('img').src = 'assets/icons/FeierabendInaktivMitText.svg';
