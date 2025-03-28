@@ -9,7 +9,7 @@
 </head>
 <body>
     <header style="background-color: rgb(236, 236, 236); height: 5em; text-align: center; padding-top: 2em; position: relative;">
-        <h1 style="font-family: Arial, Helvetica, sans-serif; color:black">Terminal</h1>
+        <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif ; color:rgb(118, 118, 118); font-weight: 100 ; ">Terminal</h1>
         <button id="hamburger-menu" style="position: absolute; top: 0.75em; left: 1em; background: none; border: none; font-size: 2em; cursor: pointer;">☰</button>
     </header>
     <div id="menu-overlay"class="menu-overlay">
@@ -27,13 +27,7 @@
         <div id="info-container" class="info-container">
             <p>Für heute sind noch keine Zeiten erfasst.</p>
         </div>
-        <div id="time-tracking" class="time-tracking-container" style="display: none;">
-            <div class="time-tracking-item">
-                <img src="assets/icons/KommenAktiv.svg" alt="Time Icon" class="time-icon" id="time-icon">
-                <p id="current-time"></p>
-                <p id="current-date"></p>
-            </div>
-        </div>
+        <!-- Dynamische time-tracking container-->
     </div>
     
     
@@ -46,17 +40,17 @@
             </button>
         </div>
         <div class="time-button-item">
-            <button id="FeierabendAktiv" class="feierabend-btn-icon">
+            <button id="FeierabendAktiv" class="feierabend-btn-icon" style="display: none;">
                 <img src="assets/icons/FeierabendAktivMitText.svg" alt="Feierabend Icon">
             </button>
         </div>
         <div class="time-button-item">
-            <button id="GehenAktiv" class="gehen-btn-icon">
+            <button id="GehenAktiv" class="gehen-btn-icon" disabled>
                 <img src="assets/icons/GehenAktivMitText.svg" alt="Gehen Icon">
             </button>
         </div>
+        
     </div>
-
 </footer>
 <script src="script.js"></script>
 </html>
