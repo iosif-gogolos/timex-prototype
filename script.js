@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-
+   
     let firstStartTime = null;
     let firstEndTime = null;
     let secondStartTime = null;
