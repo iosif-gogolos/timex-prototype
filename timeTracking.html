@@ -27,13 +27,7 @@
         <div id="info-container" class="info-container">
             <p>Für heute sind noch keine Zeiten erfasst.</p>
         </div>
-        <div id="time-tracking" class="time-tracking-container" style="display: none;">
-            <div class="time-tracking-item">
-                <img src="assets/icons/KommenAktiv.svg" alt="Time Icon" class="time-icon" id="time-icon">
-                <p id="current-time"></p>
-                <p id="current-date"></p>
-            </div>
-        </div>
+        <!-- Dynamische time-tracking container-->
     </div>
     
     
@@ -46,17 +40,16 @@
             </button>
         </div>
         <div class="time-button-item">
-            <button id="FeierabendAktiv" class="feierabend-btn-icon">
-                <img src="assets/icons/FeierabendAktivMitText.svg" alt="Feierabend Icon">
-            </button>
-        </div>
-        <div class="time-button-item">
-            <button id="GehenAktiv" class="gehen-btn-icon">
+            <button id="GehenAktiv" class="gehen-btn-icon" disabled>
                 <img src="assets/icons/GehenAktivMitText.svg" alt="Gehen Icon">
             </button>
         </div>
+        <div class="time-button-item">
+            <button id="FeierabendAktiv" class="feierabend-btn-icon" style="display: none;">
+                <img src="assets/icons/FeierabendAktivMitText.svg" alt="Feierabend Icon">
+            </button>
+        </div>
     </div>
-
 </footer>
 <script src="script.js"></script>
 </html>

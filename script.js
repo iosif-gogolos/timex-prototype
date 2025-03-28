@@ -77,17 +77,32 @@ document.addEventListener('DOMContentLoaded', function(){
         const container = document.createElement('div');
         container.id = entry.containerId;
         container.className = 'time-tracking-container';
+        
+        // Format the date and time
+        const timeString = entry.time.toLocaleTimeString('de-DE', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        const dateString = entry.time.toLocaleDateString('de-DE', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+        
         container.innerHTML = `
             <div class="time-tracking-item">
-                <img src="assets/icons/${entry.type === 'kommen' ? 'KommenAktiv' : 'GehenAktiv'}.svg" 
-                     alt="Time Icon" class="time-icon">
-                <p>${entry.time.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</p>
-                <p>${entry.time.toLocaleDateString('de-DE')}</p>
+                <img src="assets/icons/${entry.type === 'kommen' ? 'KommenAktivTransparent' : 'GehenAktivTransparent'}.svg" 
+                    alt="Time Icon" class="time-icon">
+                <div class="time-info">
+                    <p class="mb-0">${timeString} ${dateString}</p>
+                    
+                </div>
             </div>
         `;
 
-        const mainBackground = document.querySelector('.main-background');
-        mainBackground.appendChild(container);
+        // Insert the container after the info-container
+        const infoContainer = document.getElementById('info-container');
+        infoContainer.parentNode.insertBefore(container, infoContainer.nextSibling);
     }
 
     function updateInfoContainer() {
@@ -115,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function(){
             infoContainer.appendChild(breakInfo);
         }
     }
-    
+
     document.getElementById('FeierabendAktiv').addEventListener('click', function(){
         // Kontrollprompt anzeigen
         const note = prompt('Sie sind dabei ihren Arbeitstag zu beenden. Dieser Schritt kann nicht ruckgängig gemacht werden. \nOptional: Möchten Sie eine Notiz an den Projektleiter senden?');
