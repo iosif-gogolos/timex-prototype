@@ -119,6 +119,8 @@ document.addEventListener('DOMContentLoaded', function(){
     function updateInfoContainer() {
         const infoContainer = document.getElementById('info-container');
         infoContainer.style.display = 'flex';
+        infoContainer.style.flexDirection = 'column'; // Add this line
+        infoContainer.style.alignItems = 'center'; // Add this line
         infoContainer.innerHTML = '';
 
         const workHours = Math.floor(totalWorkTime / 60);
@@ -127,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function(){
         
         const workTimeInfo = document.createElement('p');
         workTimeInfo.textContent = `${formattedWork} h Arbeitszeit gebucht`;
+        workTimeInfo.style.margin = '0.5rem 0'; // Add spacing
         infoContainer.appendChild(workTimeInfo);
 
         if (totalBreakTime > 0) {
@@ -135,7 +138,8 @@ document.addEventListener('DOMContentLoaded', function(){
             const formattedBreak = `${String(breakHours).padStart(2, '0')}:${String(breakMinutes).padStart(2, '0')}`;
             
             const breakInfo = document.createElement('p');
-            breakInfo.textContent = `\n${formattedBreak} h Pause gebucht`;
+            breakInfo.textContent = `${formattedBreak} h Pause gebucht`;
+            breakInfo.style.margin = '0.5rem 0'; // Add spacing
             infoContainer.appendChild(breakInfo);
         }
     }
