@@ -21,11 +21,10 @@ document.addEventListener('DOMContentLoaded', function(){
             containerId: `time-tracking-${++containerCount}`
         };
         timeEntries.push(entry);
-        
-        // Create new tracking container
-        createTimeTrackingContainer(entry);
-        
-        if (lastAction === 'gehen' && timeEntries.length > 1) {
+
+        if (!lastAction) {
+            document.getElementById('info-container').style.display = 'none';
+        } else if (lastAction === 'gehen') {
             // Calculate and add break time
             const lastGehen = timeEntries.find(e => e.type === 'gehen');
             if (lastGehen) {
@@ -34,7 +33,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 updateInfoContainer();
             }
         }
-
+        
+        // Create new tracking container
+        createTimeTrackingContainer(entry);
         lastAction = 'kommen';
         
         // Button states
@@ -79,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function(){
         container.id = entry.containerId;
         container.className = 'time-tracking-container';
         
-        // Format the date and time
         const timeString = entry.time.toLocaleTimeString('de-DE', {
             hour: '2-digit',
             minute: '2-digit'
@@ -90,18 +90,28 @@ document.addEventListener('DOMContentLoaded', function(){
             year: 'numeric'
         });
         
+        let iconName;
+        switch(entry.type) {
+            case 'kommen':
+                iconName = 'KommenAktivTransparent';
+                break;
+            case 'gehen':
+                iconName = 'GehenAktivTransparent';
+                break;
+            case 'feierabend':
+                iconName = 'FeierabendAktivTransparent';
+                break;
+        }
+        
         container.innerHTML = `
             <div class="time-tracking-item">
-                <img src="assets/icons/${entry.type === 'kommen' ? 'KommenAktivTransparent' : 'GehenAktivTransparent'}.svg" 
-                    alt="Time Icon" class="time-icon">
+                <img src="assets/icons/${iconName}.svg" alt="Time Icon" class="time-icon">
                 <div class="time-info">
                     <p class="mb-0">${timeString} ${dateString}</p>
-                    
                 </div>
             </div>
         `;
 
-        // Insert the container after the info-container
         const infoContainer = document.getElementById('info-container');
         infoContainer.parentNode.insertBefore(container, infoContainer.nextSibling);
     }
@@ -131,28 +141,38 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     document.getElementById('FeierabendAktiv').addEventListener('click', function(){
-        // Kontrollprompt anzeigen
         const note = prompt('Sie sind dabei ihren Arbeitstag zu beenden. Dieser Schritt kann nicht ruckgängig gemacht werden. \nOptional: Möchten Sie eine Notiz an den Projektleiter senden?');
         if (note !== null){
+            const now = new Date();
+            // Create final time tracking entry for Feierabend
+            const entry = {
+                type: 'feierabend',
+                time: now,
+                containerId: `time-tracking-${++containerCount}`
+            };
+            createTimeTrackingContainer(entry);
+
+            // Calculate final work time if last action was 'kommen'
+            if (lastAction === 'kommen') {
+                const lastKommen = timeEntries.filter(e => e.type === 'kommen').pop();
+                if (lastKommen) {
+                    const workTime = Math.round((now - lastKommen.time) / (1000 * 60));
+                    totalWorkTime += workTime;
+                    updateInfoContainer();
+                }
+            }
+
             alert('Ihr Arbeitstag wurde beendet. Schönen Feierabend! \n' + (note || ' Keine Notiz'));
-             // Reset der Buttons
+            
+            // Reset buttons
             document.getElementById('KommenAktiv').disabled = true;
-            document.getElementById('KommenAktiv').querySelector('img').src = 'assets/icons/KommenInaktivMitText.svg';
-
             document.getElementById('GehenAktiv').disabled = true;
-            document.getElementById('GehenAktiv').querySelector('img').src = 'assets/icons/GehenInaktivMitText.svg';
-
             this.disabled = true;
+            
+            // Update button images
+            document.getElementById('KommenAktiv').querySelector('img').src = 'assets/icons/KommenInaktivMitText.svg';
+            document.getElementById('GehenAktiv').querySelector('img').src = 'assets/icons/GehenInaktivMitText.svg';
             this.querySelector('img').src = 'assets/icons/FeierabendInaktivMitText.svg';
-
-            const gehenButton = document.getElementById('GehenInaktiv');
-            gehenButton.disabled = true;
-            gehenButton.querySelector('img').src = 'assets/icons/GehenInaktivMitText.svg';
-
-            // Verstecke den "time-tracking"-Container
-            document.getElementById('time-tracking').style.display = 'none';
-        } else {
-            alert('Ihr Arbeitstag wurde noch nicht beendet.');
         }
        
     });
