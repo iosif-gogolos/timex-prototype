@@ -13,7 +13,8 @@ body {
     --bs-body-font-family: var(--bs-font-monospace);
     --bs-body-line-height: 1.4;
     --bs-body-bg: var(--bs-white-100);
-    background-color: #eaeaea;
+    background-color: #ECECEC
+    ;
     color: #fff;
     overflow-x: hidden; /* Verhindert horizontales Scrollen */
 }
