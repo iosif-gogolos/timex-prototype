@@ -333,6 +333,10 @@ header {
   width: 100%;
 }
 
+.login-button-home{
+  display: none;
+}
+
 .time-button-item button {
   background: none;
   border: none;
@@ -454,6 +458,8 @@ footer ul {
     .header-hamburger-menu.active .bar:nth-child(3){
         transform: rotate(-45deg) translate(5px, -5px);
     }
+
+    
 }
 
 @media (min-width: 768px) {
@@ -464,6 +470,10 @@ footer ul {
         display: none;
     }
     desktop-nav {
+        display: block;
+    }
+
+    .login-button-home{
         display: block;
     }
 
