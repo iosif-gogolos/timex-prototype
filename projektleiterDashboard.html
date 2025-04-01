@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projektleiter Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        header {
+            background-color: #000000;
+            height: 5em;
+            text-align: center;
+            padding-top: 2em;
+            position: relative;
+        }
+        header h1 {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: rgb(118, 118, 118);
+            font-weight: 100;
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #364856;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logo-container img {
+            max-width: 110px;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+        @media (min-width: 769px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+        }
+    </style>
+</head>
+<header>
+    
+</header>
+<body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <h4 id="currentDate"></h4>
+            </div>
+            <div class="col-md-8">
+                <p class="lead">Bitte die folgenden Arbeitzeiten der Zeitarbeitskräfte überprüfen und freigeben.</p>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Arbeitszeit Start</th>
+                        <th>Arbeitszeit Ende</th>
+                        <th>Gesamtstunden</th>
+                        <th>Status</th>
+                        <th>Aktion</th>
+                    </tr>
+                </thead>
+                <tbody id="workersList">
+                    <!-- Tabellendaten werden dynamisch eingefügt -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('de-DE', {
+            weekday: 'long',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    </script>
+    
+</body>
+</html>
