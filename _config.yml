@@ -1,0 +1,10 @@
+exclude:
+  - timex_backend/
+  - venv/
+  - .env
+  - .gitignore
+  - build.sh
+  - requirements.txt
+  - db.sqlite3
+  - render.yaml
+  - README.md
