@@ -224,18 +224,36 @@ document.addEventListener('DOMContentLoaded', function(){
                     note: note
                 })
             });
-
-            if (!response.ok) throw new Error('Network response was not ok');
+    
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.message || 'Netzwerkfehler');
+            }
+    
             const data = await response.json();
             
-            // Update UI with new entry
-            createTimeTrackingContainer(data);
-            updateButtonStates(type);
-            updateInfoContainer();
-
+            if (data.status === 'success') {
+                // UI aktualisieren
+                createTimeTrackingContainer({
+                    type: data.data.type,
+                    time: new Date(data.data.time),
+                    note: data.data.note
+                });
+                
+                // Button-Status aktualisieren
+                updateButtonStates(type.toLowerCase());
+                
+                // Info-Container aktualisieren falls nötig
+                if (type === 'FEIERABEND') {
+                    updateInfoContainer();
+                }
+            } else {
+                throw new Error(data.message || 'Unbekannter Fehler');
+            }
+    
         } catch (error) {
             console.error('Error:', error);
-            alert('Fehler beim Speichern des Zeiteintrags');
+            alert(`Fehler beim Speichern des Zeiteintrags: ${error.message}`);
         }
     }
 
